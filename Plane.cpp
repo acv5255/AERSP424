@@ -37,8 +37,6 @@ Plane::Plane(const string& to, const string& from) {
 	this->destination = to;
 	if (to != "SCE") this->distance = this->distances[to];
 	else this->distance = this->distances[from];
-
-	std::cout << "Distance for new plane: " << distance << std::endl;
 }
 
 // Getters

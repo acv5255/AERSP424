@@ -5,7 +5,11 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/include) # include a
 add_executable(${CMAKE_PROJECT_NAME} main.cpp Plane.hpp Plane.cpp ATC.hpp ATC.cpp
 				HW2_Visualizer.hpp HW2_Visualizer.cpp) # add source files to the executable
 				
-target_link_libraries(${CMAKE_PROJECT_NAME} "${CMAKE_SOURCE_DIR}/lib/SDL2d.lib;${CMAKE_SOURCE_DIR}/lib/SDL2maind.lib")
+target_link_libraries(
+    ${CMAKE_PROJECT_NAME} 
+    ${CMAKE_SOURCE_DIR}/lib/SDL2d.lib
+    ${CMAKE_SOURCE_DIR}/lib/SDL2maind.lib
+)
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/bin")
 
 # Copy the dynamic library to the same folder as the executable file.
