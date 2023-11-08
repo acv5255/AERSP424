@@ -24,9 +24,9 @@ void ATC::control_traffic() {
 	if (landed_planes >= MAX_LANDED_PLANE_NUM) {
 		for (auto plane : registered_planes) {
 			if (
-				(plane->get_at_SCE() == false) and
-				(plane->distance_to_SCE() <= AIRSPACE_DISTANCE) and
-				(std::abs(plane->get_loiter_time()) <= 1e-12)
+				(plane->get_at_SCE() == false) &&
+				(plane->distance_to_SCE() <= AIRSPACE_DISTANCE) &&
+				(std::abs(plane->get_loiter_time()) < 1e-8)
 				) {
 				plane->set_loiter_time(100.0);
 			}

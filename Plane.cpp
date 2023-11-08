@@ -37,6 +37,7 @@ Plane::Plane(const string& to, const string& from) {
 	this->destination = to;
 	if (to != "SCE") this->distance = this->distances[to];
 	else this->distance = this->distances[from];
+
 }
 
 // Getters
@@ -53,15 +54,13 @@ void Plane::set_loiter_time(double new_val) { this->loiter_time = new_val; };
 
 void Plane::operate(double dt) {
 	
-	if (std::abs(loiter_time) > 1e-12) {
-		set_loiter_time(
-			std::max(loiter_time - dt, 0.0)
-		);
+	if (loiter_time > 0.0) {
+		loiter_time -= dt;
 		return;
 	}
 
-	if (std::abs(wait_time) > 1e-12) {
-		wait_time = std::max(0.0, wait_time - dt);
+	if (wait_time > 0.0) {
+		wait_time -= dt;
 		return;
 	}
 
@@ -77,9 +76,11 @@ void Plane::operate(double dt) {
 		at_SCE = true;
 	}
 
-	wait_time = time_on_ground();
+	wait_time = std::max(0.0, time_on_ground());
 	std::swap(origin, destination);
 	pos = 0.0;
+	//wait_time = 0.0;
+	//loiter_time = 0.0;
 	return;
 }
 
